@@ -1,4 +1,4 @@
-export interface PopularMovie {
+export interface IPopularMovie {
     id: number
     title: string
     language: string,
@@ -9,7 +9,7 @@ export interface PopularMovie {
 }
 
 
-export const data: PopularMovie[] = [
+export const data: IPopularMovie[] = [
     {
         id: 1,
         title: "Robin Hood",
