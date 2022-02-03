@@ -10,5 +10,5 @@ const reduxStore = configureStore({
     reducer:allReducers,
     devTools:true
 })
-
+export type RootState = ReturnType<typeof reduxStore.getState>
 export default reduxStore;
