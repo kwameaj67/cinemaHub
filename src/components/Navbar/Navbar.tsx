@@ -1,16 +1,17 @@
 import React, { FC } from 'react'
 import './navbar.css'
 import { BiSearch } from 'react-icons/bi'
+import { Link } from 'react-router-dom'
 
 interface NavBarProperties {
-    onShowSearch:boolean,
+    onShowSearch: boolean,
     onShowLoginSignupForm: boolean,
     onClickSearchButton: () => void,
     onClickLoginButton: () => void,
 }
 const Navbar: FC<NavBarProperties> = (props): JSX.Element => {
 
-   
+
     return (
         <div className="navbar_container">
             <div className="navbar_content">
@@ -32,7 +33,9 @@ const Navbar: FC<NavBarProperties> = (props): JSX.Element => {
                 <div className="border"></div>
                 <div className="navbar_items">
                     <div className="logo_container">
-                        <h1 className="logo">CinemaHub</h1>
+                        <Link to='/' style={{textDecoration:'none'}}>
+                            <h1 className="logo">CinemaHub</h1>
+                        </Link>
                     </div>
                     <ul>
                         <li><a href="/">Catoons</a></li>
