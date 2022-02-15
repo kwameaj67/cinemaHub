@@ -1,38 +1,58 @@
 import React, { FC, useEffect, useState } from 'react'
 import './home.css'
+import './responsive.css'
 import axios from 'axios'
 import Navbar from '../../components/Navbar/Navbar'
 // import Footer from '../../components/Footer/Footer'
-import { PopularMovie } from '../../Utils/Data'
-import { POPULAR_API, IMG_API } from '../../config'
+import { IPopularMovie } from '../../Utils/Data'
+import { POPULAR_API, IMG_API, SEARCH_API } from '../../config'
 import moment from 'moment'
 import { FcRating } from 'react-icons/fc'
 import { HiOutlineArrowNarrowUp } from 'react-icons/hi'
+import { CgClose } from 'react-icons/cg'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchPopularMoviesAsync } from '../../redux/slices/popularMovieSlice'
+import { RootState } from '../../redux/store/store'
 
 
 const HomePage: FC = () => {
-    const [popularMovie, setPopularMovie] = useState<PopularMovie[]>([]);
-    // eslint-disable-next-line
+    const [popularMovie, setPopularMovie] = useState<IPopularMovie[]>([]);
     const [page, setPage] = useState<number>(1);
-    const [visible, setVisible] = useState<boolean>(false);
+    const [scrollVisible, setScrollVisible] = useState<boolean>(false);
+    const [searchVisible, setSearchVisible] = useState<boolean>(false);
+    const [formVisible, setFormVisible] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [searchText, setSearchText] = useState<string>("");
+
+    const dispatch = useDispatch();
+    const data = useSelector((state: RootState) => state.popularMovies)
+    const movies = data.movies
+    console.log(movies)
 
     const getPopularMovies = async (page: number) => {
+        setLoading(true)
         const res = await axios.get(POPULAR_API + `&page=${page}`)
         const data = res.data.results
+        // console.log(res)
         setPopularMovie(data)
+        setLoading(false)
     }
-
-
-    console.log(popularMovie)
-
-
-    // eslint-disable-next-line
+    const handleSearchSubmit = async (event: any) => {
+        event.preventDefault()
+        setLoading(true)
+        const res = await axios.get(SEARCH_API +searchText.toLowerCase() + `&page=${page}`)
+        const data = res.data.results
+        setPopularMovie(data)
+        setLoading(false)
+        setSearchVisible(false);
+        setSearchText('')
+        setPage(1)
+    }
     const moveToNextPage = () => {
-        if (page === 1) {
-            setPage(2)
+        console.log(page)
+        if (page === 2) {
             getPopularMovies(2)
-        } else {
-            setPage(1)
+        } else if (page === 1) {
             getPopularMovies(1)
         }
         window.scrollTo(0, 0)
@@ -43,34 +63,70 @@ const HomePage: FC = () => {
     const listenToScroll = () => {
         var y = window.scrollY;
         if (y >= 3000) {
-            setVisible(true)
+            setScrollVisible(true)
         } else {
-            setVisible(false)
+            setScrollVisible(false)
         }
-
     }
+    const toggleSearchSection = () => {
+        setSearchVisible(!searchVisible)
+    }
+    const toggleFormSection = () => {
+        setFormVisible(!formVisible)
+    }
+    
     useEffect(() => {
         window.addEventListener("scroll", listenToScroll)
-        getPopularMovies(1)
+        getPopularMovies(page)
+        dispatch(fetchPopularMoviesAsync(page))
 
         return () => {
             window.removeEventListener("scroll", listenToScroll)
         }
-    }, []);
+    }, [dispatch,page]);
 
     return (
         <div className="home_container">
-            <Navbar />
+            <Navbar
+                onShowSearch={searchVisible}
+                onShowLoginSignupForm={formVisible}
+                onClickSearchButton={toggleSearchSection}
+                onClickLoginButton={toggleFormSection}
+            />
+            {
+                searchVisible &&
+                <div className="search_section">
+                    <div className="search_background">
+                        <div className="search_content">
+                            <button className="close_button" onClick={() => { setSearchVisible(false) }}>
+                                <CgClose className="close_icon" size={20} />
+                            </button>
+                            <form className="search_input" onSubmit={handleSearchSubmit}>
+                                <input required type="search" value={searchText} placeholder="Enter anything " onChange={(e) => { setSearchText(e.target.value) }} />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            }
+            {
+                popularMovie.length > 0 &&
+                <div className="heading_section">
+                    <div className="content">
+                        <h1>Popular Movies 🍿 🎥</h1>
+                    </div>
+                </div>
+            }
             <div className="popular_section">
                 {
-                    visible && (
+                    scrollVisible && (
                         <button className="scroll_button" onClick={scrollToTop}>
                             <HiOutlineArrowNarrowUp size={22} color="white" />
                         </button>
                     )
                 }
                 <div className="row">
-                    {popularMovie.length > 0 ?
+                    {loading === false && popularMovie.length > 0 &&
                         <>
                             {popularMovie.map((item) => {
                                 return (
@@ -100,17 +156,26 @@ const HomePage: FC = () => {
                                 )
                             })
                             }
+                            <div className="pagination_container">
+                                <div className="pages">
+                                    <ul>
+                                        <li><button className={page === 1 ? 'active' : 'button'}
+                                            onClick={() => {
+                                                setPage(1)
+                                                moveToNextPage()
+                                            }}>1</button></li>
+                                        <li><button className={page === 2 ? 'active' : 'button'}
+                                            onClick={() => {
+                                                setPage(2)
+                                                moveToNextPage()
+                                            }}>2</button></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </>
-                        : <p>There's no data available</p>
                     }
-                </div>
-                <div className="pagination_container">
-                    <div className="pages">
-                        <ul>
-                            <li><button className={page === 1 ? 'active' : 'button'} onClick={moveToNextPage}>1</button></li>
-                            <li><button className={page === 2 ? 'active' : 'button'} onClick={moveToNextPage}>2</button></li>
-                        </ul>
-                    </div>
+                    {loading === true && <p className="data_state">Fetching popular movies...</p>}
+                    {loading === false && popularMovie.length === 0 && <p className="data_state">There's no movies available</p>}
                 </div>
 
             </div>
