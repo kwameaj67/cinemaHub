@@ -10,6 +10,3 @@ Run this app using
 
 ### `npm start`
 
-## Screenshot
-<img src="src/assets/images/cimemaHub.webp"  width="900">
-
