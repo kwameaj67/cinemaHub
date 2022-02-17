@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import './navbar.css'
 import { BiSearch } from 'react-icons/bi'
+import { BiMenuAltLeft } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
 
 interface NavBarProperties {
@@ -37,20 +38,19 @@ const Navbar: FC<NavBarProperties> = (props): JSX.Element => {
                             <h1 className="logo">CinemaHub</h1>
                         </Link>
                     </div>
-                    <ul>
-                        <li><a href="/">Catoons</a></li>
-                        <li><a href="/">Action</a></li>
-                        <li><a href="/">Children & Family</a></li>
-                        <li><a href="/">Dramas</a></li>
-                        <li><a href="/">Fantasy</a></li>
-                        <li><a href="/">Music & Musicals</a></li>
-                        <li><a href="/">Sci-Fi</a></li>
-                        <li><a href="/">Horror</a></li>
+                    <ul className="hide">
+                        <li><a href="/"><span>Catoons</span></a></li>
+                        <li><a href="/"><span>Action</span></a></li>
+                        <li><a href="/"><span>Children & Family</span></a></li>
+                        <li><a href="/"><span>Dramas</span></a></li>
+                        <li><a href="/"><span>Fantasy</span></a></li>
+                        <li><a href="/"><span>Music & Musicals</span></a></li>
+                        <li><a href="/"><span>Sci-Fi</span></a></li>
+                        <li><a href="/"><span>Horror</span></a></li>
                     </ul>
-                    {/* <div className="btns">
-                        <a href="/" className="search">Search <FiSearch size={16} className="icon" /> </a>
-                        <a href="/" className="login">Log in/Sign up</a>
-                    </div> */}
+                    <div className="menu">
+                        <button> <BiMenuAltLeft size={28} color="#A0A0A0" className="icon" /></button>
+                    </div>
                 </div>
             </div>
 

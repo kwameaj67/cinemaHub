@@ -33,7 +33,7 @@
     color:var(--text);
     font-size:16px;
     letter-spacing:-0.4px;
-    font-family:"SemiBold";
+    font-family:"Bold";
     cursor:pointer;
 }
 .navbar_container .navbar_content .navbar_items ul{
@@ -46,11 +46,12 @@
 .navbar_container .navbar_content .navbar_items ul li a{
     text-decoration:none;
     font-family:"Medium";
-    /* letter-spacing:3.5px; */
-    /* text-transform:uppercase; */
-    font-size:15px;
+    font-size:14px;
     color:var(--text);
     transition:all 0.3s ease-out;
+}
+.navbar_container .navbar_content .navbar_items ul li a span{
+    font-family:"Regular";
 }
 .navbar_container .navbar_content .navbar_items ul li a:hover{
     transition:all 0.3s ease-out;
@@ -62,6 +63,7 @@
     flex-direction:row;
     align-items:center;
     column-gap:15px;
+    
 }
 .navbar_container .navbar_content .navbar_items .btns .search,
 .navbar_container .navbar_content .navbar_items .btns .login{
@@ -69,7 +71,7 @@
     outline:none;
     background-color:transparent;
     color:var(--text);
-    font-size:15px;
+    font-size:14px;
     font-family:"Medium";
     text-decoration:none;
     transition:all 0.1s ease-in;
@@ -85,6 +87,16 @@
     transition:all 0.3s ease-out;
     color:var(--hover);
 }
+.navbar_container .navbar_content .navbar_items .menu {
+   display:none;
+} 
+.navbar_container .navbar_content .navbar_items .menu button{
+    background-color:transparent;
+    border:none;
+    outline:0;
+    cursor:pointer;
+}
+
 
 /* border */
 .navbar_container .border{
@@ -94,7 +106,7 @@
     height:1.8px;
 }
 
-
+/* responsiveness */
 @media (max-width: 1400px){
     .navbar_container .navbar_content{
         margin:0rem 10rem;
@@ -103,5 +115,26 @@
 @media (max-width: 1120px){
     .navbar_container .navbar_content{
         margin:0rem 2rem;
+    }
+}
+@media (max-width: 1000px){
+    .navbar_container .navbar_content{
+        margin:0rem 0rem;
+        border-radius:0px;
+    }
+    
+    .navbar_container .navbar_content .navbar_items .hide{
+        list-style:none;
+        display:none;
+    }
+    .navbar_container .navbar_content .navbar_items .menu{
+        display:block;
+        cursor:pointer;
+        transition: all 0.3s ease-in;
+    }
+    .navbar_container .navbar_content .navbar_items .menu:hover{
+        transform:scale(1.1);
+        transition: all 0.3s ease-in;
+        transform:rotate(360deg);
     }
 }
