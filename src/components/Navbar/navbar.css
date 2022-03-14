@@ -131,6 +131,7 @@
         display:block;
         cursor:pointer;
         transition: all 0.3s ease-in;
+        transform:rotate(0deg);
     }
     .navbar_container .navbar_content .navbar_items .menu:hover{
         transform:scale(1.1);

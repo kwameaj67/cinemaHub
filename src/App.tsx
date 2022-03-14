@@ -1,9 +1,8 @@
 import React,{Suspense} from 'react';
 import './App.css';
 
-// import MainRouter from './Router/routes'
-
 const MainRouter = React.lazy(()=> import('./Router/routes'))
+
 function App() {
   return (
     <div className="App">

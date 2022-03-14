@@ -26,8 +26,8 @@ const HomePage: FC = () => {
 
     const dispatch = useDispatch();
     const data = useSelector((state: RootState) => state.popularMovies)
-    const movies = data.movies
-    console.log(movies)
+    const movies = data
+    // console.log(movies) 
 
     const getPopularMovies = async (page: number) => {
         setLoading(true)

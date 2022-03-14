@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import './navbar.css'
 import { BiSearch } from 'react-icons/bi'
-import { BiMenuAltLeft } from 'react-icons/bi'
+import { RiMenu2Line } from 'react-icons/ri'
 import { Link } from 'react-router-dom'
 
 interface NavBarProperties {
@@ -49,7 +49,7 @@ const Navbar: FC<NavBarProperties> = (props): JSX.Element => {
                         <li><a href="/"><span>Horror</span></a></li>
                     </ul>
                     <div className="menu">
-                        <button> <BiMenuAltLeft size={28} color="#A0A0A0" className="icon" /></button>
+                        <button> <RiMenu2Line size={26} color="#A0A0A0" className="icon" /></button>
                     </div>
                 </div>
             </div>

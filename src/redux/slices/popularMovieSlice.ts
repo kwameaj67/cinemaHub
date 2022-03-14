@@ -15,8 +15,8 @@ const initialState:Array<IPopularMovie> = []
 
 const popularMovieSlice = createSlice({
     name: 'popularMovies',
-    initialState: { movies: initialState },
-    // initialState: initialState,
+    // initialState: { movies: initialState },
+    initialState: initialState,
     reducers: {
 
     },
@@ -26,7 +26,7 @@ const popularMovieSlice = createSlice({
         })
         builder.addCase(fetchPopularMoviesAsync.fulfilled, (state, action) => {
             console.log("Fetching data successfully")
-            state.movies.push(action.payload);
+            state.push(action.payload);
         })
         builder.addCase(fetchPopularMoviesAsync.rejected, (state, action) => {
             console.log("Error fetching data...")
