@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
 import './home.css'
 import './responsive.css'
-import axios from 'axios'
 import Navbar from '../../components/Navbar/Navbar'
 // import Footer from '../../components/Footer/Footer'
 import { IPopularMovie } from '../../Utils/Data'
@@ -26,23 +25,22 @@ const HomePage: FC = () => {
 
     const dispatch = useDispatch();
     const data = useSelector((state: RootState) => state.popularMovies)
-    const movies = data
     // console.log(movies) 
 
-    const getPopularMovies = async (page: number) => {
+    const getPopularMovies =  async (page: number) => {
         setLoading(true)
-        const res = await axios.get(POPULAR_API + `&page=${page}`)
-        const data = res.data.results
-        // console.log(res)
-        setPopularMovie(data)
+        const response = await fetch(POPULAR_API + `&page=${page}`)
+        let data = await response.json()
+        console.log(data)
+        setPopularMovie(data.results)
         setLoading(false)
     }
     const handleSearchSubmit = async (event: any) => {
         event.preventDefault()
         setLoading(true)
-        const res = await axios.get(SEARCH_API +searchText.toLowerCase() + `&page=${page}`)
-        const data = res.data.results
-        setPopularMovie(data)
+        const response = await fetch(SEARCH_API +searchText.toLowerCase() + `&page=${page}`)
+        const data = await response.json();
+        setPopularMovie(data.results)
         setLoading(false)
         setSearchVisible(false);
         setSearchText('')
@@ -102,7 +100,8 @@ const HomePage: FC = () => {
                                 <CgClose className="close_icon" size={20} />
                             </button>
                             <form className="search_input" onSubmit={handleSearchSubmit}>
-                                <input required type="search" value={searchText} placeholder="Enter anything " onChange={(e) => { setSearchText(e.target.value) }} />
+                                <input autoFocus required type="search" value={searchText} placeholder="Enter anything " onChange={(e) => { setSearchText(e.target.value) }} />
+                                <button  disabled={searchText.length <= 0 ? true : false}>Search {searchText}</button>
                             </form>
                         </div>
                     </div>
