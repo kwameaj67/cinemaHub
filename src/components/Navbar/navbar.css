@@ -139,3 +139,8 @@
         transform:rotate(360deg);
     }
 }
+@media (max-width: 769px){
+    .navbar_container .navbar_content .navbar_items ul{
+        display:none;
+    }
+}
