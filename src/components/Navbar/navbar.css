@@ -45,8 +45,9 @@
 }
 .navbar_container .navbar_content .navbar_items ul li a{
     text-decoration:none;
-    font-family:"Medium";
+    font-family:"SemiBold";
     font-size:14px;
+    letter-spacing: -0.2px;
     color:var(--text);
     transition:all 0.3s ease-out;
 }
@@ -61,9 +62,9 @@
 .navbar_container .navbar_content .navbar_items .btns{
     display:flex;
     flex-direction:row;
+    justify-content: space-between;
     align-items:center;
     column-gap:15px;
-    
 }
 .navbar_container .navbar_content .navbar_items .btns .search,
 .navbar_container .navbar_content .navbar_items .btns .login{
@@ -71,8 +72,8 @@
     outline:none;
     background-color:transparent;
     color:var(--text);
-    font-size:14px;
-    font-family:"Medium";
+    font-size:14.5px;
+    font-family:"SemiBold";
     text-decoration:none;
     transition:all 0.1s ease-in;
     letter-spacing:-.2px;
@@ -96,7 +97,6 @@
     outline:0;
     cursor:pointer;
 }
-
 
 /* border */
 .navbar_container .border{
@@ -141,6 +141,14 @@
 }
 @media (max-width: 769px){
     .navbar_container .navbar_content .navbar_items ul{
-        display:none;
+       display: none;
+    }
+    .navbar_container .navbar_content .navbar_items .btns{
+        display:flex;
+        flex-direction:row;
+        justify-content: space-between;
+        align-items:center;
+        column-gap:15px;
+        width: 100%;
     }
 }

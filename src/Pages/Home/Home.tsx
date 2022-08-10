@@ -24,7 +24,7 @@ const HomePage: FC = () => {
     const [searchText, setSearchText] = useState<string>("");
 
     const dispatch = useDispatch();
-    const data = useSelector((state: RootState) => state.popularMovies)
+    // const data  = useSelector((state: RootState) => state.popularMovies)
     // console.log(movies) 
 
     const getPopularMovies =  async (page: number) => {
@@ -67,7 +67,7 @@ const HomePage: FC = () => {
         }
     }
     const toggleSearchSection = () => {
-        setSearchVisible(!searchVisible)
+        setSearchVisible(true)
     }
     const toggleFormSection = () => {
         setFormVisible(!formVisible)
@@ -101,12 +101,11 @@ const HomePage: FC = () => {
                             </button>
                             <form className="search_input" onSubmit={handleSearchSubmit}>
                                 <input autoFocus required type="search" value={searchText} placeholder="Enter anything " onChange={(e) => { setSearchText(e.target.value) }} />
-                                <button  disabled={searchText.length <= 0 ? true : false}>Search {searchText}</button>
+                                <button  disabled={searchText.length <= 0 ? true : false}>Search <span>{searchText}</span></button>
                             </form>
                         </div>
                     </div>
                 </div>
-
             }
             {
                 popularMovie.length > 0 &&

@@ -69,5 +69,16 @@
         margin: 1rem 1rem;
         background: #2E2E2F;
     }
+    .home_container .search_section .search_content .close_button{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        width:30px;
+        height:30px;
+        border-radius:50%;
+        background: transparent;
+        transition: all 0.2s;
+        margin: 8rem 2rem;
+    }
 }
     

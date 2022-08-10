@@ -45,6 +45,7 @@
     align-items:center;
     justify-content:center;
     flex-direction:column;
+    row-gap: 10px;
 }
 .popular_section .row .data_state{
     font-size:16px;
@@ -63,7 +64,7 @@
     cursor:pointer;
     overflow:hidden;
     position:relative;
-    margin:3px 0px; 
+    margin:0px 0px; 
     background-color:white;
     border-radius:20px;
     width:100%;
@@ -72,7 +73,7 @@
 .popular_section .row .item .img_container{
     flex-basis:45%;
     width:100%;
-    height:380px;
+    height:350px;
 }
 .popular_section .row .item .img_container .img{
     width:100%;
@@ -141,7 +142,7 @@
 }
 .popular_section .row .item .text .other .rating .rating_text .r_1{
     font-size:15px;
-    font-family:"Light";
+    font-family:"Medium";
     color: var(--hover);
     letter-spacing:0.2px;
 }
@@ -158,7 +159,7 @@
 }
 .popular_section .row .item .text .other .published_date p{
     font-size:15px;
-    font-family:"Light";
+    font-family:"Regular";
     color: var(--black);
     letter-spacing:0.2px;
 }
@@ -250,28 +251,27 @@
 .home_container .search_section{
     position:fixed;
     width:100%;
-    z-index:100;
     height:100%;
+    z-index:100;
     display:flex;
     justify-content:center;
     flex-direction:column;
-    transition: opacity 150ms ease-in;
-   
+    
 }
 .home_container .search_background{
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
     background-color:#F9F9F9;
-    /* filter: blur(2px); */
+    transition: opacity 150ms ease-in;
 }
 .home_container .search_section .search_content{
     display:flex;
     flex-direction:column;
-    height: 100%;
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
+    /* margin:0rem 18rem; */
 }
 .home_container .search_section .search_content .close_button{
     display:flex;
@@ -331,5 +331,12 @@
     border:none;
     outline:0;
     cursor:pointer;
+    transition:0.1s ease-in;
 }
-
+.home_container .search_section .search_content .search_input button:hover{
+    opacity:0.9;
+    transition:0.1s ease-in;
+}
+.home_container .search_section .search_content .search_input button span{
+    font-family:"Bold";
+}

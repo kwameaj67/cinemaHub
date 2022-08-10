@@ -11,8 +11,6 @@ interface NavBarProperties {
     onClickLoginButton: () => void,
 }
 const Navbar: FC<NavBarProperties> = (props): JSX.Element => {
-
-
     return (
         <div className="navbar_container">
             <div className="navbar_content">
@@ -28,7 +26,7 @@ const Navbar: FC<NavBarProperties> = (props): JSX.Element => {
                     </ul>
                     <div className="btns">
                         <button onClick={props.onClickSearchButton} className="search">Search <BiSearch size={16} className="icon" /> </button>
-                        <button className="login">Log in/Sign up</button>
+                        <button className="login">Login / Sign up</button>
                     </div>
                 </div>
                 <div className="border"></div>
